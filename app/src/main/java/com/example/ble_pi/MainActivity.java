@@ -15,9 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity implements BluetoothAdapter.LeScanCallback {
+public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = "BLE_PI";
 
@@ -40,16 +39,8 @@ public class MainActivity extends AppCompatActivity implements BluetoothAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        connect(address);
-//        disconnect(address);
-
         moveServo();
-    }
 
-    @Override
-    public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
-        mBluetoothAdapter.startLeScan(new UUID[]{arduino_UUID}, this);
-        Log.i(TAG, "onLeScan started");
     }
 
     public boolean connect(String address){
@@ -97,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothAdapter.
                 writeCharacteristic(address, characteristic, valueMove);
             }else {
                 // failure
+                Log.i(TAG, "onServicesDiscovered failure: " + status);
             }
         }
 
@@ -109,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothAdapter.
     // for multiple characterisrics we use this
     // we dont need this here
     // my arduino uuid has only one characteristic
-    public BluetoothGattCharacteristic findCharacteristic(String address, UUID characteristicUUID){
+    private BluetoothGattCharacteristic findCharacteristic(String address, UUID characteristicUUID){
         BluetoothGatt bluetoothGatt = (BluetoothGatt) bluetoothGatts.get(address);
 
         if (bluetoothGatt == null) {
@@ -125,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements BluetoothAdapter.
         }
         return null;
     }
-
 
     protected boolean writeCharacteristic(String address, BluetoothGattCharacteristic characteristic, byte[] value){
 
@@ -143,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothAdapter.
     }
 
     // method to disconnect Arduino from Phone
-    public void disconnect(String address){
+    private void disconnect(String address){
         if(mBluetoothAdapter == null){
             Log.i(TAG, "Not connected to Arduino");
         }
@@ -155,15 +146,15 @@ public class MainActivity extends AppCompatActivity implements BluetoothAdapter.
         }
     }
 
-    public void moveServo(){
+    private void moveServo(){
         if(objectFound) {
+            Log.i(TAG, "Object found true, moving right......");
             valueMove = valueMoveRight;
             connect(address);
-//            disconnect(address);
         }else{
+            Log.i(TAG, "Object found false, left");
             valueMove = valueMoveLeft;
             connect(address);
-//            disconnect(address);
         }
     }
 }
