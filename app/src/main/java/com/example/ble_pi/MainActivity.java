@@ -22,14 +22,14 @@ public class MainActivity extends AppCompatActivity{
 
     BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-    public static UUID SERVICE_UUID = UUID.fromString("19B10000-E8F2-537E-4F6C-D104768A1214");
-    public static UUID arduino_UUID = UUID.fromString("19B10001-E8F2-537E-4F6C-D104768A1214"); //switchCharacteristic
+    private static UUID SERVICE_UUID = UUID.fromString("19B10000-E8F2-537E-4F6C-D104768A1214");
+    private static UUID arduino_UUID = UUID.fromString("19B10001-E8F2-537E-4F6C-D104768A1214"); //switchCharacteristic
 
-    public static String address = "CE:2C:01:E0:21:9A";
+    private static String address = "CE:2C:01:E0:21:9A";
 
     private Map<String, Object> bluetoothGatts = new HashMap<>();
 
-    private boolean objectFound = false;
+    public boolean objectFound = false;
     private byte[] valueMove;
     private byte[] valueMoveRight = new byte[]{0x01};
     private byte[] valueMoveLeft = new byte[]{0x02};
@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         moveServo();
-
     }
 
-    public boolean connect(String address){
+    // android phone connects to arduino using MAC add
+    private boolean connect(String address){
         Log.i(TAG, "Connecting to " + address);
         if(mBluetoothAdapter == null || address == null){
             Log.i(TAG, "BluetoothAdapter is not initialized");
@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity{
         return null;
     }
 
+    //this method adds value to the characteristic so we that we can control arduino
     protected boolean writeCharacteristic(String address, BluetoothGattCharacteristic characteristic, byte[] value){
 
         BluetoothGatt bluetoothGatt = (BluetoothGatt) bluetoothGatts.get(address);
@@ -146,7 +147,8 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    private void moveServo(){
+    // method to move
+    public void moveServo(){
         if(objectFound) {
             Log.i(TAG, "Object found true, moving right......");
             valueMove = valueMoveRight;
