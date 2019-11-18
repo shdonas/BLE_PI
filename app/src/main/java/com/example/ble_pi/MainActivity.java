@@ -16,6 +16,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Try and connect to the bluetooth device
+ *
+ * @author          Shakhawat Hossain
+ * @version         1.0
+ * @since           11/18/2019
+ */
+
 public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = "BLE_PI";
@@ -33,6 +41,8 @@ public class MainActivity extends AppCompatActivity{
     private byte[] valueMove;
     private byte[] valueMoveRight = new byte[]{0x01};
     private byte[] valueMoveLeft = new byte[]{0x02};
+    private byte[] valueGo;
+    private byte[] valueStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
