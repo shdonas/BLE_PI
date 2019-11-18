@@ -53,6 +53,14 @@ public class MainActivity extends AppCompatActivity{
         moveServo();
     }
 
+
+    /**
+     * Try and connect to the bluetooth device
+     *
+     * @author          Shakhawat Hossain
+     * @version         1.0
+     * @since           11/18/2019
+     */
     // android phone connects to arduino using MAC add
     private boolean connect(String address){
         Log.i(TAG, "Connecting to " + address);
@@ -129,6 +137,14 @@ public class MainActivity extends AppCompatActivity{
         return null;
     }
 
+
+    /**
+     * writing bytes to arduino
+     *
+     * @author          Shakhawat Hossain
+     * @version         1.0
+     * @since           11/18/2019
+     */
     //this method adds value to the characteristic so we that we can control arduino
     protected boolean writeCharacteristic(String address, BluetoothGattCharacteristic characteristic, byte[] value){
 
@@ -145,6 +161,13 @@ public class MainActivity extends AppCompatActivity{
         return false;
     }
 
+    /**
+     * method to disconnect Arduino from Phone
+     *
+     * @author          Shakhawat Hossain
+     * @version         1.0
+     * @since           11/18/2019
+     */
     // method to disconnect Arduino from Phone
     private void disconnect(String address){
         if(mBluetoothAdapter == null){
@@ -158,6 +181,14 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+
+    /**
+     * moving servo when connected
+     *
+     * @author          Shakhawat Hossain
+     * @version         1.0
+     * @since           11/18/2019
+     */
     // method to move
     public void moveServo(){
         if(objectFound) {
