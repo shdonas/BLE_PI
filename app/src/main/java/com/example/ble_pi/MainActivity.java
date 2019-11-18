@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity{
 
     private Map<String, Object> bluetoothGatts = new HashMap<>();
 
-    public boolean objectFound = false;
+    public boolean objectFound = true;
     private byte[] valueMove;
     private byte[] valueMoveRight = new byte[]{0x01};
     private byte[] valueMoveLeft = new byte[]{0x02};
