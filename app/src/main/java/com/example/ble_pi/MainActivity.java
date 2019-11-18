@@ -18,6 +18,7 @@ import java.util.UUID;
 
 /**
  * Try and connect to the bluetooth device
+ * sending or writing bytes to arduino
  *
  * @author          Shakhawat Hossain
  * @version         1.0
@@ -41,8 +42,8 @@ public class MainActivity extends AppCompatActivity{
     private byte[] valueMove;
     private byte[] valueMoveRight = new byte[]{0x01};
     private byte[] valueMoveLeft = new byte[]{0x02};
-    private byte[] valueGo;
-    private byte[] valueStop;
+    private byte[] valueGo = new byte[]{0x03};
+    private byte[] valueStop = new byte[]{0x04};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
