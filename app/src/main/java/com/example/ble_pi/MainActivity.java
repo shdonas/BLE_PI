@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity{
     /**
      * Try and connect to the bluetooth device
      *
+     * @param address
      * @author          Shakhawat Hossain
      * @version         1.0
      * @since           11/18/2019
@@ -80,6 +81,15 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
 
+
+
+    /**
+     * Callback method
+     *
+     * @author          Shakhawat Hossain
+     * @version         1.0
+     * @since           11/18/2019
+     */
     private BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
@@ -141,6 +151,9 @@ public class MainActivity extends AppCompatActivity{
     /**
      * writing bytes to arduino
      *
+     * @param value
+     * @param characteristic
+     * @param address
      * @author          Shakhawat Hossain
      * @version         1.0
      * @since           11/18/2019
@@ -164,6 +177,7 @@ public class MainActivity extends AppCompatActivity{
     /**
      * method to disconnect Arduino from Phone
      *
+     * @param address
      * @author          Shakhawat Hossain
      * @version         1.0
      * @since           11/18/2019
@@ -190,6 +204,7 @@ public class MainActivity extends AppCompatActivity{
      * @since           11/18/2019
      */
     // method to move
+    // needs to implement parameter - object found
     public void moveServo(){
         if(objectFound) {
             Log.i(TAG, "Object found true, moving right......");
